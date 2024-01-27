@@ -10,7 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.1",
+    "langchain": "^0.1.9",
     "llm-chunk": "^0.0.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.9.0",
     "openai": "^4.26.0"
   }
 }

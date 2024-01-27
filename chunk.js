@@ -1,46 +1,56 @@
-const file = require("./gong_data/tempTranscript.json");
-const { chunk } = require("llm-chunk");
 const { OpenAI } = require("openai");
+require("dotenv").config();
 
-async function main() {
-  let meta = {
-    speakers: [],
-    timeStamp: 0
-  };
-  
-  let lastStr = "";
-  let lastCharCount = 0;
-
-  let str = ""
+const createOverlappingChunks = (gongCallFile, maxLength = 512, overlap = 25) => {
+  let chunks = [];
+  let chunk = "";
   let charCount = 0;
+  let record = {
+    transcript: "",
+    participants: []
+  }
 
-  file.monologues.forEach((m => {
-    if ((charCount + m.text.length) > 512) {
-      str = ""
+  gongCallFile.monologues.forEach((m) => {
+    let transcript = `${m.timestampStr}: ${m.speakerName}: ${m.text}\n`
+    record.participants.push(m.speakerName)
+
+    if((charCount + transcript.length) >= maxLength) {
+      record.transcript = chunk;
+      record.participants = [...new Set(record.participants)]
+      chunks.push(record);
+      record = {
+        transcript: "",
+        participants: []
+      }
+      chunk = "";
+      charCount = 0;
     }
-  })
 
+    chunk += transcript;
+    charCount += transcript.length;
+  });
 
-  // const res = chunk(text, {
-  //   maxLength: 512,
-  //   overlap: 50,
-  //   splitter: "sentence",
-  //   delimiters: "\n",
-  // });
+  return chunks;
+};
 
-  // console.log(res);
+(async () => {
+  const openai = new OpenAI({
+    apiKey: process.env.OPEN_AI_KEY
+  });
 
-  // const openai = new OpenAI({
-  //   apiKey: "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",
-  //   organization: "org-WnytsNc0haHpbIXtP7H4a44X",
-  // });
+  const gongCallFile = require("./gong_data/tempTranscript.json");
+  const chunks = createOverlappingChunks(gongCallFile);
 
-  // const embeddingRes = await openai.embeddings.create({
-  //   input: res,
-  //   model: "text-embedding-3-small",
-  // });
+  const embeddings = await openai.embeddings.create({
+    input: chunks.map((c) => c.transcript),
+    model: "text-embedding-3-small"
+  });
 
-  // console.dir(embeddingRes, { depth: null });
-}
+  chunks.forEach((c, i) => {
+    c.embedding = embeddings.data[i].embedding;
+  });
 
-main();
+  //write to file
+  const fs = require("fs");
+  fs.writeFileSync("./gong_data/chunks.json", JSON.stringify(chunks));
+})();
