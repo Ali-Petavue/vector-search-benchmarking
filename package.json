@@ -10,11 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@zilliz/milvus2-sdk-node": "^2.3.5",
     "dotenv": "^16.4.1",
     "langchain": "^0.1.9",
     "llm-chunk": "^0.0.1",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.0",
-    "openai": "^4.26.0"
+    "openai": "^4.26.0",
+    "typescript": "^5.3.3"
   }
 }
