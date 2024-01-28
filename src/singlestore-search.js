@@ -30,14 +30,23 @@ const singleStoreVectorSearch = async (connection, query, limit) => {
         }
     });
     console.log("connected")
+    let QueryResults = []
     for(let question of questions){
+        let startTime = new Date().getTime();
         if (question.embedding.length !== 1536) {
             throw new Error("Embedding array length does not match the expected size.");
         }
         
-        const results = await singleStoreVectorSearch(singleStoreConnection, JSON.stringify(question.embedding), 3)
-        console.log("question =>",question.question,"results =>",results)
-        break;
+        const results = await singleStoreVectorSearch(singleStoreConnection, JSON.stringify(question.embedding), 2)
+        console.log("question :",question.question,"\nresults :\n",results)
+        QueryResults.push({
+            question: question.question,
+            timeTaken: new Date().getTime() - startTime,
+            results: results
+        })
     }
 
+    //write to file
+    const fs = require("fs");
+    fs.writeFileSync("./gong_data/singleStoreQueryResults.json", JSON.stringify(QueryResults));
 })()

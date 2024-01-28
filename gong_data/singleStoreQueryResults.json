@@ -1,0 +1,162 @@
+[
+    {
+        "question": "How many people have blocker",
+        "timeTaken": 3625,
+        "results": [
+            {
+                "transcript": "5:38: Abhishek: Guys on my side, I just wanted to know when can that freezing issue and latency issue be solved? Because I'll be writing 10 queries, right? Because today, I think the cleanup would be done of both the tenants, the demo, tenants and I'll be writing a lot more queries to like, you know, make them better, right? So those charting issues with 1,010 1,000 data points and, you know, freezing issues. Once there are like 50 68 queries, I think that needs to get resolved at some point. \n6:11: Jeyaraj: Abishek. I'll let let's discuss this again. I mean, like I had a call with basket and Kishore. This is some kind of a decision to be made with respect to the charting library today. We are using chart as which is by default, it has its own limitation. You know, we, when we designed with this library, we did not think about scale in mind at that time. It was like all demo in mind. So now we are just thinking to move to, you know, a high charts or D3 that discussion, you know, that conclusion to be made. Probably we can finalize that today based on that, you know… we can move forward so that's kind of, I mean, I agree it's kind of a blocker for now… technical challenges. The. \n",
+                "participants": "[\"Abhishek\",\"Jeyaraj\"]",
+                "similarity": 0.28022387623786926
+            },
+            {
+                "transcript": "15:20: Sriram: Okay. So yesterday I went, I looked at different options to run task. So we're gonna try out two things that is, so one is COVID, second is task and like someone is already made a scheduler of kind. So first we'll try out copenity see if it works. If it doesn't work, then we'll try out task. And… yeah, and I spend my time learning copenities. \n15:54: Gnana: And then Sam, were, can… \n15:56: Jeyaraj: Can't we do this with, you know, simple easy to itself? Like can't, we have some simple scheduler our site? \n",
+                "participants": "[\"Sriram\",\"Gnana\",\"Jeyaraj\"]",
+                "similarity": 0.2380121499300003
+            }
+        ]
+    },
+    {
+        "question": "was salesforce discussed",
+        "timeTaken": 509,
+        "results": [
+            {
+                "transcript": "1:36: Jeyaraj: Okay. Sorry, I was just looking some PR. \n1:48: Jeyaraj: Did, are join the call? Yeah, I think he joined… this. No, no, no, I was asking this, any PR, any fixes that are pending to go? \n2:01: Ali: Yes. Yeah, I… \n2:03: Jeyaraj: Okay. Probably after this call, we'll stay and, you know, review it and we can merge. Okay. Yeah. Afternoon. We have one testing session. I mean, myself, we just ask everyone will test the Salesforce and where are we at this slack? Is it, you know, an endeavor? Like what is the status on the slack integration? \n",
+                "participants": "[\"Jeyaraj\",\"Ali\"]",
+                "similarity": 0.411098837852478
+            },
+            {
+                "transcript": "0:00: Abhishek: Hello? \n0:04: Bhaskar: I have wf, fetch from home that's why I can. \n0:06: Abhishek: Could join today. \n0:10: Bhaskar: Every day. I'm usually traveling at the distance. \n0:12: Jeyaraj: The… hello, cto, sir. Hey, sub man. Good morning. Hello. \n0:25: Gnana: I… \n0:26: Jeyaraj: Set up a call man and a bus Baker. We, we just get on a call and does the Salesforce integration? Okay? Any issues or anything pending that has to be merged? \n0:40: Bhaskar: Or is fine, only that we will need some account where there are, some data actually. Okay. My account also has a data. Maybe what I'll do is in the contact. I didn't have the data contacts are in my account. Okay? One sec. \n",
+                "participants": "[\"Abhishek\",\"Bhaskar\",\"Jeyaraj\",\"Gnana\"]",
+                "similarity": 0.4040824770927429
+            }
+        ]
+    },
+    {
+        "question": "Are there any extreme issue",
+        "timeTaken": 469,
+        "results": [
+            {
+                "transcript": "4:00: Jeyaraj: Yeah, it's kind of, you know, extreme. It's okay, like just quickly handle it and then otherwise, things are fine. I mean, like… \n4:09: Bhaskar: Yeah, issue with that is like, so anyway, I'll move it to David. I, it won't be much time. It won't be a blocker, but there are a couple of scenarios. I'll verify it through. Ijas one because like the data may get duplicated. So there are a couple of things because we have these two by two metrics, right? And the two by two metrics, there is no like pointers that, okay, row moved from row one to row two or something like that. So that is kind of issue. So I'll discuss with you and Ijas both. Yeah, yeah, sure. Okay. But I'll move it, whatever we have today. I'll move it to the. \n",
+                "participants": "[\"Jeyaraj\",\"Bhaskar\"]",
+                "similarity": 0.29356008768081665
+            },
+            {
+                "transcript": "5:38: Abhishek: Guys on my side, I just wanted to know when can that freezing issue and latency issue be solved? Because I'll be writing 10 queries, right? Because today, I think the cleanup would be done of both the tenants, the demo, tenants and I'll be writing a lot more queries to like, you know, make them better, right? So those charting issues with 1,010 1,000 data points and, you know, freezing issues. Once there are like 50 68 queries, I think that needs to get resolved at some point. \n6:11: Jeyaraj: Abishek. I'll let let's discuss this again. I mean, like I had a call with basket and Kishore. This is some kind of a decision to be made with respect to the charting library today. We are using chart as which is by default, it has its own limitation. You know, we, when we designed with this library, we did not think about scale in mind at that time. It was like all demo in mind. So now we are just thinking to move to, you know, a high charts or D3 that discussion, you know, that conclusion to be made. Probably we can finalize that today based on that, you know… we can move forward so that's kind of, I mean, I agree it's kind of a blocker for now… technical challenges. The. \n",
+                "participants": "[\"Abhishek\",\"Jeyaraj\"]",
+                "similarity": 0.2833975851535797
+            }
+        ]
+    },
+    {
+        "question": "what are the issues",
+        "timeTaken": 512,
+        "results": [
+            {
+                "transcript": "5:38: Abhishek: Guys on my side, I just wanted to know when can that freezing issue and latency issue be solved? Because I'll be writing 10 queries, right? Because today, I think the cleanup would be done of both the tenants, the demo, tenants and I'll be writing a lot more queries to like, you know, make them better, right? So those charting issues with 1,010 1,000 data points and, you know, freezing issues. Once there are like 50 68 queries, I think that needs to get resolved at some point. \n6:11: Jeyaraj: Abishek. I'll let let's discuss this again. I mean, like I had a call with basket and Kishore. This is some kind of a decision to be made with respect to the charting library today. We are using chart as which is by default, it has its own limitation. You know, we, when we designed with this library, we did not think about scale in mind at that time. It was like all demo in mind. So now we are just thinking to move to, you know, a high charts or D3 that discussion, you know, that conclusion to be made. Probably we can finalize that today based on that, you know… we can move forward so that's kind of, I mean, I agree it's kind of a blocker for now… technical challenges. The. \n",
+                "participants": "[\"Abhishek\",\"Jeyaraj\"]",
+                "similarity": 0.3257219195365906
+            },
+            {
+                "transcript": "1:36: Jeyaraj: Okay. Sorry, I was just looking some PR. \n1:48: Jeyaraj: Did, are join the call? Yeah, I think he joined… this. No, no, no, I was asking this, any PR, any fixes that are pending to go? \n2:01: Ali: Yes. Yeah, I… \n2:03: Jeyaraj: Okay. Probably after this call, we'll stay and, you know, review it and we can merge. Okay. Yeah. Afternoon. We have one testing session. I mean, myself, we just ask everyone will test the Salesforce and where are we at this slack? Is it, you know, an endeavor? Like what is the status on the slack integration? \n",
+                "participants": "[\"Jeyaraj\",\"Ali\"]",
+                "similarity": 0.25595441460609436
+            }
+        ]
+    },
+    {
+        "question": "was chart issue discussed",
+        "timeTaken": 508,
+        "results": [
+            {
+                "transcript": "9:25: Jeyaraj: Yeah, we already just, you know, thinking there's there are two way, right? One better chart library. There is option one second, you know, for all these time series charts, bar graph, it should be painted on. It cannot be, you know, sent multiple thousands of data points at once that's ruled out. So it has to be a patented one. Like either we can come up with a horizontal scroll and stuff like that. So, which is something we already discussed. But, you know, yeah, he's just coming up with some benchmark about this chart libraries based on that. We will make a decision today. Like if it is high charts, hopefully that works for you at least now. But I want some kind of, you know, better or… you know, some kind of a stable solution, not any more, you know, a quick fixes actually. \n",
+                "participants": "[\"Jeyaraj\"]",
+                "similarity": 0.5772913694381714
+            },
+            {
+                "transcript": "5:38: Abhishek: Guys on my side, I just wanted to know when can that freezing issue and latency issue be solved? Because I'll be writing 10 queries, right? Because today, I think the cleanup would be done of both the tenants, the demo, tenants and I'll be writing a lot more queries to like, you know, make them better, right? So those charting issues with 1,010 1,000 data points and, you know, freezing issues. Once there are like 50 68 queries, I think that needs to get resolved at some point. \n6:11: Jeyaraj: Abishek. I'll let let's discuss this again. I mean, like I had a call with basket and Kishore. This is some kind of a decision to be made with respect to the charting library today. We are using chart as which is by default, it has its own limitation. You know, we, when we designed with this library, we did not think about scale in mind at that time. It was like all demo in mind. So now we are just thinking to move to, you know, a high charts or D3 that discussion, you know, that conclusion to be made. Probably we can finalize that today based on that, you know… we can move forward so that's kind of, I mean, I agree it's kind of a blocker for now… technical challenges. The. \n",
+                "participants": "[\"Abhishek\",\"Jeyaraj\"]",
+                "similarity": 0.5477653741836548
+            }
+        ]
+    },
+    {
+        "question": "Is there a blocker for google sheet integration",
+        "timeTaken": 500,
+        "results": [
+            {
+                "transcript": "42:08: Bhaskar: Let me check the permission. \n42:18: Jeyaraj: Just a minute. \n42:28: Jeyaraj: I'm trying to find that permission. \n42:36: Jeyaraj: We see. \n42:42: Ali: So, if you are connected your calendar, then you can see it in my google app. \n42:47: Bhaskar: Now, see here there are in google, it, okay. There are these are only two conditions. Okay? Either you either you get this added, create and delete all your google spreadsheet or either you have only did. Okay, only option is either choose any of these two. Okay? Now, in our case, we definitely this one because we need to create a google set. That means we together only will get added, create and delete. We can tell you don't have separate create formation. So we have to go with this one. \n",
+                "participants": "[\"Bhaskar\",\"Jeyaraj\",\"Ali\"]",
+                "similarity": 0.4298451542854309
+            },
+            {
+                "transcript": "3:22: Jeyaraj: Title? Okay. Fine. I'm this a google sheet related things whatever for, the google app review that also in staging, correct? \n3:30: Sriram: No, it's not. \n3:31: Jeyaraj: Staging in demo? \n3:32: Bhaskar: In the not in the E. So there is a couple of issues. So when I delete the column, it is working fine. When I'm adding the column right now, if my columns is exceeding the total, a total columns that are there in the seat, then it is showing error. So there, I need to just handle that part. Okay? If I'm trying to add column, which is more than the current seat size, I need to resize. So that thing I need to add, then I can do it. \n",
+                "participants": "[\"Jeyaraj\",\"Sriram\",\"Bhaskar\"]",
+                "similarity": 0.3666327893733978
+            }
+        ]
+    },
+    {
+        "question": "what chart library is decided to be used.",
+        "timeTaken": 538,
+        "results": [
+            {
+                "transcript": "9:25: Jeyaraj: Yeah, we already just, you know, thinking there's there are two way, right? One better chart library. There is option one second, you know, for all these time series charts, bar graph, it should be painted on. It cannot be, you know, sent multiple thousands of data points at once that's ruled out. So it has to be a patented one. Like either we can come up with a horizontal scroll and stuff like that. So, which is something we already discussed. But, you know, yeah, he's just coming up with some benchmark about this chart libraries based on that. We will make a decision today. Like if it is high charts, hopefully that works for you at least now. But I want some kind of, you know, better or… you know, some kind of a stable solution, not any more, you know, a quick fixes actually. \n",
+                "participants": "[\"Jeyaraj\"]",
+                "similarity": 0.6193819046020508
+            },
+            {
+                "transcript": "7:36: Abhishek: So many of them have their JavaScript equivalence as well, right? So they have their Java script like flatly S does exist. I think even get lot also has its Java script like, you know, rapper or version? \n7:53: Jeyaraj: Yeah. Well, we actually Kishore working on some benchmarks. So do we need to go with high charts, plot, Lee or a day three? Is Kishore in the call? By any chance? No. Okay. Anyway, let's just ping him. Just some decisions to be made in this, you know, because like we almost hit that scale, we don't want to rework again, you know, by choosing a wrong charting library here. So if we go with high charts, my question is, you know, will that work forever? You know, at least for next one year with all these data points or if it is plot legs, we can go with lots like one just before implementing anything. I need small benchmark which is something Kishore is working now. So hopefully like by today, we can get some conclusion and then we'll make the change shake. So me. \n",
+                "participants": "[\"Abhishek\",\"Jeyaraj\"]",
+                "similarity": 0.48305976390838623
+            }
+        ]
+    },
+    {
+        "question": "what are the blocker for Ali",
+        "timeTaken": 522,
+        "results": [
+            {
+                "transcript": "31:27: Ali: No, nothing. \n31:30: Jeyaraj: Data or also? \n31:31: Ali: Okay. Yeah. \n31:33: Jeyaraj: Now, Baker anything from your side pending? I don't know why did they even ask you to stay in the case for? \n31:42: Ali: So, so… \n31:43: Sriram: Keeping pending from? \n31:46: Bhaskar: Nothing pending from my side, I didn't do any change in that. Any script? \n31:53: Ali: So, if you have time now, so let's get on a call and discuss all those data source filtering and disconnect at? \n31:59: Bhaskar: Yeah, I'll call you so, Jared can we discuss regarding this google seat if you are free right now? \n",
+                "participants": "[\"Ali\",\"Jeyaraj\",\"Sriram\",\"Bhaskar\"]",
+                "similarity": 0.3617413341999054
+            },
+            {
+                "transcript": "30:18: Ali: If you'd ignore remove the dot GitHub or whatever like some. \n30:26: Gnana: Okay. \n30:31: Ali: Yeah. Just invite me here to this report and then I'll take care. \n30:35: Jeyaraj: Orchestrator engine, manage access… and be. \n30:46: Ali: At dot com… it should only set within our again. \n30:51: Jeyaraj: This is crap, you know, the, whatever the filter they are giving me. Okay? This is one of the stupidity I have. \n31:05: Ali: Yeah. Got you. \n31:08: Jeyaraj: Orchestrator engine. \n31:15: Jeyaraj: Okay. This is done. Cool. What next? Anything pending in the agent service side, PR or anything else? \n",
+                "participants": "[\"Ali\",\"Gnana\",\"Jeyaraj\"]",
+                "similarity": 0.34982529282569885
+            }
+        ]
+    },
+    {
+        "question": "what are the things jeyaraj is going to work on",
+        "timeTaken": 512,
+        "results": [
+            {
+                "transcript": "4:49: Sriram: This is will. \n4:50: Jeyaraj: Be on which branch. This is integration, right? This will be an integration. \n4:56: Bhaskar: Yeah, it will be. So it will be an integration report and the LMS that we have. Okay. \n5:04: Jeyaraj: Okay. Fine. I think, he wants to see that also. So, yeah, we'll… discuss and quickly push that. Let's see here. Cool. I mean, like my side, nothing blocked on. \n5:22: Madhumitha: I have to work on to. \n5:25: Jeyaraj: Of to preparing bunch of reports. So my, I'll focus on that. Yeah, nothing blocker, anything. \n",
+                "participants": "[\"Sriram\",\"Jeyaraj\",\"Bhaskar\",\"Madhumitha\"]",
+                "similarity": 0.5254297852516174
+            },
+            {
+                "transcript": "16:58: Gnana: No, yeah. Because like… \n16:59: Jeyaraj: In the past, I think he just also done very similar. \n17:03: Sriram: We had a word with him regarding that right last time when I was in office. So, yeah, I mean that's the thing that's the last thing that we'll do, but again, see again, right? That we'll have to write the whole scheduler from scratch, right? Like it's similar to what Yan does for the had system right now. So that's why I'm studying an, and there's a similar concert in COVID also, right? So, you know, taking some time to study, it will be easier when we go ahead and implement it. \n",
+                "participants": "[\"Gnana\",\"Jeyaraj\",\"Sriram\"]",
+                "similarity": 0.4988124668598175
+            }
+        ]
+    },
+    {
+        "question": "who all need a followup call to resolve issues",
+        "timeTaken": 513,
+        "results": [
+            {
+                "transcript": "0:00: Abhishek: Hello? \n0:04: Bhaskar: I have wf, fetch from home that's why I can. \n0:06: Abhishek: Could join today. \n0:10: Bhaskar: Every day. I'm usually traveling at the distance. \n0:12: Jeyaraj: The… hello, cto, sir. Hey, sub man. Good morning. Hello. \n0:25: Gnana: I… \n0:26: Jeyaraj: Set up a call man and a bus Baker. We, we just get on a call and does the Salesforce integration? Okay? Any issues or anything pending that has to be merged? \n0:40: Bhaskar: Or is fine, only that we will need some account where there are, some data actually. Okay. My account also has a data. Maybe what I'll do is in the contact. I didn't have the data contacts are in my account. Okay? One sec. \n",
+                "participants": "[\"Abhishek\",\"Bhaskar\",\"Jeyaraj\",\"Gnana\"]",
+                "similarity": 0.38019102811813354
+            },
+            {
+                "transcript": "1:36: Jeyaraj: Okay. Sorry, I was just looking some PR. \n1:48: Jeyaraj: Did, are join the call? Yeah, I think he joined… this. No, no, no, I was asking this, any PR, any fixes that are pending to go? \n2:01: Ali: Yes. Yeah, I… \n2:03: Jeyaraj: Okay. Probably after this call, we'll stay and, you know, review it and we can merge. Okay. Yeah. Afternoon. We have one testing session. I mean, myself, we just ask everyone will test the Salesforce and where are we at this slack? Is it, you know, an endeavor? Like what is the status on the slack integration? \n",
+                "participants": "[\"Jeyaraj\",\"Ali\"]",
+                "similarity": 0.37618958950042725
+            }
+        ]
+    }
+]
