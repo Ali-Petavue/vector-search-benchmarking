@@ -5,30 +5,27 @@ const createOverlappingChunks = (gongCallFile, maxLength = 512, overlap = 25) =>
   let chunks = [];
   let chunk = "";
   let charCount = 0;
-  let record = {
-    transcript: "",
-    participants: []
-  }
+  let participants = [];
 
-  gongCallFile.monologues.forEach((m) => {
+  for(let m of gongCallFile.monologues) {
     let transcript = `${m.timestampStr}: ${m.speakerName}: ${m.text}\n`
-    record.participants.push(m.speakerName)
+    participants.push(m.speakerName);
 
     if((charCount + transcript.length) >= maxLength) {
-      record.transcript = chunk;
-      record.participants = [...new Set(record.participants)]
-      chunks.push(record);
-      record = {
-        transcript: "",
-        participants: []
-      }
+      chunk += transcript;
+      chunks.push({
+        transcript: chunk,
+        participants: [...new Set(participants)]
+      });
       chunk = "";
+      participants = [];
       charCount = 0;
+    }else{
+      //remove else block to get overlapping chunks
+      chunk += transcript;
+      charCount += transcript.length;
     }
-
-    chunk += transcript;
-    charCount += transcript.length;
-  });
+  }
 
   return chunks;
 };
@@ -46,9 +43,9 @@ const createOverlappingChunks = (gongCallFile, maxLength = 512, overlap = 25) =>
     model: "text-embedding-3-small"
   });
 
-  chunks.forEach((c, i) => {
-    c.embedding = embeddings.data[i].embedding;
-  });
+  for(let emb of embeddings.data) {
+    chunks[emb.index].embedding = emb.embedding;
+  }
 
   //write to file
   const fs = require("fs");
