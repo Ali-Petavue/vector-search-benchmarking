@@ -7,16 +7,11 @@ async function main() {
   });
 
   const questions = [
-    "How many people have blocker",
-    "was salesforce discussed",
-    "Are there any extreme issue",
-    "what are the issues",
-    "was chart issue discussed",
-    "Is there a blocker for google sheet integration",
-    "what chart library is decided to be used.",
-    "what are the blocker for Ali",
-    "what are the things jeyaraj is going to work on",
-    "who all need a followup call to resolve issues",
+    "what is prasanna saying",
+    "what samuel is trying to understand",
+    "what is the product strategy",
+    "what are deliverables for the next quarter",
+    "what are the next steps",
   ];
 
   const data = [];

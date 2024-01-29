@@ -12,7 +12,7 @@ const createTableChunks = async (connection) => {
     const query = `CREATE TABLE IF NOT EXISTS chunks (
         id INT AUTO_INCREMENT PRIMARY KEY,
         transcript TEXT,
-        embeddings vector(1536),
+        embeddings vector(1536) NOT NULL,
         participants JSON
     )`;
     await connection.query(query);
@@ -51,7 +51,7 @@ const insertChunks = async (chunks, connection) => {
         console.log("You have successfully connected to SingleStore.");
         await createTableChunks(singleStoreConnection);
         console.log("You have successfully created the table.");
-        await insertChunks(require("../gong_data/chunks.json"), singleStoreConnection);
+        await insertChunks(require("../gong_data/chunks-2.json"), singleStoreConnection);
         console.log("You have successfully inserted the chunks into the table.");
         
     } catch (err) {// Good programmers always handle their errors :)
