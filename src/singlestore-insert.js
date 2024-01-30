@@ -1,61 +1,73 @@
-const mysql = require("mysql")
+const BPromise = require("bluebird");
 
-//chunk
-// {
-//     transcript: "",
-//     participants: [],
-//     embeddings: []
-// }
+/**
+ *
+ * @param {import("mysql").Connection} connection
+ * @param {*} chunks
+ */
+module.exports.insertChunksToSinglestore = async (connection, chunks) => {
+  console.info("Dropping collection from singlestore");
+  await new Promise((res, rej) => {
+    connection.query(`DROP TABLE IF EXISTS recordings`, (err, results) => {
+      if (err) {
+        return rej(err);
+      }
 
-const createTableChunks = async (connection) => {
-    //participants array, embeddings array
-    const query = `CREATE TABLE IF NOT EXISTS chunks (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        transcript TEXT,
-        embeddings vector(1536) NOT NULL,
-        participants JSON
-    )`;
-    await connection.query(query);
-}
+      res(results);
+    });
+  });
 
-const insertChunks = async (chunks, connection) => {
-    const query = `INSERT INTO chunks (transcript, participants, embeddings) VALUES (?, ?, ?)`;
+  console.info("Creating table in singlestore");
+  await new Promise(async (res, rej) => {
+    const query = `CREATE TABLE recordings (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          transcript TEXT NOT NULL,
+          embeddings vector(1536) NOT NULL,
+          metadata JSON NOT NULL,
+          VECTOR INDEX (embeddings) INDEX_OPTIONS '{"index_type":"IVF_FLAT", "nlist":2, "nprobe":1}')`;
 
-    for (const chunk of chunks) {
-        // Ensure the embedding is an array of 1536 floating-point numbers
-        if (chunk.embedding.length !== 1536) {
-            throw new Error("Embedding array length is not 1536");
+    connection.query(query, (err, results) => {
+      if (err) {
+        return rej(err);
+      }
+
+      res(results);
+    });
+  });
+
+  console.info("Starting insertion in singlestore");
+  let time = Date.now();
+
+  for (let idx = 0; idx < chunks.length / 500; idx++) {
+    console.info("Singlestore batch " + idx);
+
+    const _chunks = chunks.slice(idx * 500, idx * 500 + 500);
+    if (_chunks.length === 0) continue;
+
+    const query = `INSERT INTO recordings (transcript, metadata, embeddings) VALUES (?)`;
+
+    await new Promise((res, rej) => {
+      // Execute the query for each chunk
+      connection.query(
+        query,
+        _chunks.map((chunk) => [
+          chunk.transcript,
+          JSON.stringify({ participants: chunk.participants }),
+          JSON.stringify(chunk.embedding),
+        ]),
+        (err) => {
+          if (err) {
+            return rej(err);
+          }
+
+          res();
         }
+      );
+    });
+  }
+  time = Date.now() - time;
 
-        // Execute the query for each chunk
-        await connection.query(query, [chunk.transcript, JSON.stringify(chunk.participants), JSON.stringify(chunk.embedding)]);
-    }
+  console.info("Insertion complete for singlestore");
+
+  return time;
 };
-
-
-// main is run at the end
-( async () => {
-    let singleStoreConnection;
-    try {
-        singleStoreConnection = await mysql.createConnection({
-            host: 'svc-3482219c-a389-4079-b18b-d50662524e8a-shared-dml.aws-virginia-6.svc.singlestore.com',
-            port: 3333,
-            user: 'ali-play',
-            password: "8EjXdnRUQifcPqURvfL3DxJVFosLpLkx",
-            database: 'database_06865',
-            ssl: {
-                rejectUnauthorized: false
-            }
-        });
-
-        console.log("You have successfully connected to SingleStore.");
-        await createTableChunks(singleStoreConnection);
-        console.log("You have successfully created the table.");
-        await insertChunks(require("../gong_data/chunks-2.json"), singleStoreConnection);
-        console.log("You have successfully inserted the chunks into the table.");
-        
-    } catch (err) {// Good programmers always handle their errors :)
-        console.error('ERROR', err);
-        process.exit(1);
-    } finally { if (singleStoreConnection) { await singleStoreConnection.end(); } }
-})();
