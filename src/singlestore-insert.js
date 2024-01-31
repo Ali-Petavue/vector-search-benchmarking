@@ -1,11 +1,13 @@
-const BPromise = require("bluebird");
+const emojiStrip = require("emoji-strip");
+const fs = require("fs");
+const path = require("path");
 
 /**
  *
  * @param {import("mysql").Connection} connection
  * @param {*} chunks
  */
-module.exports.insertChunksToSinglestore = async (connection, chunks) => {
+module.exports.insertChunksToSinglestore = async (connection) => {
   console.info("Dropping collection from singlestore");
   await new Promise((res, rej) => {
     connection.query(`DROP TABLE IF EXISTS recordings`, (err, results) => {
@@ -38,32 +40,60 @@ module.exports.insertChunksToSinglestore = async (connection, chunks) => {
   console.info("Starting insertion in singlestore");
   let time = Date.now();
 
-  for (let idx = 0; idx < chunks.length / 500; idx++) {
-    console.info("Singlestore batch " + idx);
+  const files = fs.readdirSync(path.join(__dirname, "./data/chunk"));
 
-    const _chunks = chunks.slice(idx * 500, idx * 500 + 500);
-    if (_chunks.length === 0) continue;
+  let fileIdx = 0;
+  let totalChunks = 0;
+  for (const file of files) {
+    console.log("Singlestore inserting file", fileIdx++);
+    const chunks = JSON.parse(
+      fs.readFileSync(path.join(__dirname, "./data/chunk", file))
+    );
 
-    const query = `INSERT INTO recordings (transcript, metadata, embeddings) VALUES (?)`;
+    for (let idx = 0; idx < chunks.length / 500; idx++) {
+      const _chunks = chunks.slice(idx * 500, idx * 500 + 500);
+      if (_chunks.length === 0) continue;
 
-    await new Promise((res, rej) => {
-      // Execute the query for each chunk
-      connection.query(
-        query,
-        _chunks.map((chunk) => [
-          chunk.transcript,
+      totalChunks += _chunks.length;
+      console.info("Singlestore batch", fileIdx, idx, totalChunks);
+
+      const query = `INSERT INTO recordings (transcript, metadata, embeddings) VALUES ${new Array(
+        _chunks.length
+      )
+        .fill()
+        .map((_) => `(?, ?, ?)`)
+        .join(", ")}`;
+
+      const data = _chunks
+        .map((chunk) => [
+          chunk.transcript
+            .replaceAll(
+              /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
+              ""
+            )
+            .replaceAll(/\s+/g, " ")
+            .trim(),
           JSON.stringify({ participants: chunk.participants }),
           JSON.stringify(chunk.embedding),
-        ]),
-        (err) => {
-          if (err) {
-            return rej(err);
-          }
+        ])
+        .flat();
 
-          res();
-        }
-      );
-    });
+      await new Promise((res, rej) => {
+        // Execute the query for each chunk
+        connection.query(
+          query,
+          data,
+          (err) => {
+            if (err) {
+              return rej(err);
+            }
+
+            res();
+          }
+        );
+      });
+
+    }
   }
   time = Date.now() - time;
 

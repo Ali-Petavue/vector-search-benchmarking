@@ -44,11 +44,11 @@ async function main() {
   });
 
   const singleStoreConnection = mysql.createConnection({
-    host: "svc-e66d9f1f-7e20-42e2-a90e-56ecc2f2b592-dml.aws-ohio-1.svc.singlestore.com",
-    port: 3306,
-    user: "dev-crm-job-usr",
-    password: "wLqd2hW10u9X",
-    database: "dev_crm_db",
+    host: "svc-3482219c-a389-4079-b18b-d50662524e8a-shared-dml.aws-virginia-6.svc.singlestore.com",
+    port: 3333,
+    user: "ali-play",
+    password: "8EjXdnRUQifcPqURvfL3DxJVFosLpLkx",
+    database: "database_06865",
     ssl: {
       rejectUnauthorized: false,
     },
@@ -63,13 +63,12 @@ async function main() {
 
     if (SHOULD_PUSH_CHUNKS) {
       console.time("chunking");
-      let chunks = [];
 
       for (const file of files) {
         const rawFilePath = path.join(__dirname, "./data/raw", file);
         const chunkFilePath = path.join(__dirname, "./data/chunk", file);
 
-        const _chunks = await createOverlappingChunks(
+        await createOverlappingChunks(
           rawFilePath,
           chunkFilePath,
           CHUNK_LENGTH,
@@ -77,19 +76,18 @@ async function main() {
         );
 
         console.timeLog("chunking");
-        chunks = chunks.concat(_chunks);
       }
 
       console.timeEnd("chunking");
 
-      console.info("inserting chunks", chunks.length);
+      console.info("inserting chunks");
       const times = await Promise.all([
-        // insertChunksToMilvus(milvusClient, chunks),
-        // insertChunksToQdrant(qdrantClient, chunks),
-        insertChunksToSinglestore(singleStoreConnection, chunks),
+        insertChunksToMilvus(milvusClient),
+        // insertChunksToQdrant(qdrantClient),
+        insertChunksToSinglestore(singleStoreConnection),
       ]);
 
-      console.log("chunks inserted", times, chunks.length);
+      console.log("chunks inserted", times);
     }
 
     const questionsPath = path.join(__dirname, "./data/questions.json");

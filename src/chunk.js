@@ -58,6 +58,4 @@ module.exports.createOverlappingChunks = async (
       flag: "w",
     });
   }
-
-  return JSON.parse(fs.readFileSync(chunkFilePath));
 };

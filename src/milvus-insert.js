@@ -3,13 +3,16 @@ const {
   IndexType,
   MetricType,
 } = require("@zilliz/milvus2-sdk-node");
+const emojiStrip = require("emoji-strip");
+const fs = require("fs");
+const path = require("path");
 
 /**
  *
  * @param {MilvusClient} client
  * @param {*} chunks
  */
-module.exports.insertChunksToMilvus = async (client, chunks) => {
+module.exports.insertChunksToMilvus = async (client) => {
   const collectionsExists = await client.hasCollection({
     collection_name: "recordings",
   });
@@ -59,25 +62,41 @@ module.exports.insertChunksToMilvus = async (client, chunks) => {
   console.info("Starting insertion in milvus");
   let time = Date.now();
 
-  for (let idx = 0; idx < chunks.length / 500; idx++) {
-    console.info("Milvus batch " + idx);
+  const files = fs.readdirSync(path.join(__dirname, "./data/chunk"));
 
-    const _chunks = chunks.slice(idx * 500, idx * 500 + 500);
+  let rowIdx = 0
+  for (const file of files) {
+    const chunks = JSON.parse(
+      fs.readFileSync(path.join(__dirname, "./data/chunk", file))
+    );
 
-    if (_chunks.length === 0) continue
+    for (let idx = 0; idx < chunks.length / 500; idx++) {
+      console.info("Milvus batch " + idx);
 
-    await client.insert({
-      collection_name: "recordings",
-      fields_data: _chunks.map((chunk, idx) => ({
-        id: idx,
-        transcript_embeddings: chunk.embedding,
-        transcript: chunk.transcript,
-        metadata: {
-          participants: chunk.participants,
-        },
-      })),
-    });
+      const _chunks = chunks.slice(idx * 500, idx * 500 + 500);
+
+      if (_chunks.length === 0) continue;
+
+      await client.insert({
+        collection_name: "recordings",
+        fields_data: _chunks.map((chunk) => ({
+          id: rowIdx++,
+          transcript_embeddings: chunk.embedding,
+          transcript: chunk.transcript
+            .replaceAll(
+              /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
+              ""
+            )
+            .replaceAll(/\s+/g, " ")
+            .trim(),
+          metadata: {
+            participants: chunk.participants,
+          },
+        })),
+      });
+    }
   }
+
   time = Date.now() - time;
 
   console.info("Insering complete for milvus");
